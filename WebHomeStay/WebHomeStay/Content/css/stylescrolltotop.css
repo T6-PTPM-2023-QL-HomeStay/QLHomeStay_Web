@@ -1,0 +1,28 @@
+﻿#scrollToTopBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Thêm styles để canh lề và chỉnh vị trí */
+body {
+    margin: 0; /* Loại bỏ margin mặc định */
+    padding: 0; /* Loại bỏ padding mặc định */
+}
+
+.container {
+    padding-right: 20px; /* Để tạo khoảng trống bên phải */
+}
+
+/* Thêm media query để điều chỉnh khoảng cách khi màn hình nhỏ hơn */
+@media (max-width: 576px) {
+    #scrollToTopBtn {
+        right: 10px;
+    }
+}
