@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "Register";
-    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+    Layout = "~/Views/Shared/_LoginRegisterLayout.cshtml";
 }
 
 <div class="login-wrap d-flex align-items-center flex-wrap justify-content-center">
@@ -22,57 +22,43 @@
 
                         <div class="input-group custom">
                             @Html.TextBox("HotenKH", "", new { @class = "form-control", type = "text", placeholder = "Họ Tên Khách Hàng" })
-                            <div class="input-group-append custom">
-                                <span class="input-group-text"></span>
-                            </div>
+
                         </div>
                         <h7 style="color:red;text-align:left">@ViewData["Loi1"]</h7>
 
                         <div class="input-group custom">
                             @Html.TextBox("Ngaysinh", "", new { @class = "form-control", type = "date", placeholder = "Ngày Sinh" })
-                            <div class="input-group-append custom">
-                                <span class="input-group-text"></span>
-                            </div>
+
                         </div>
                         <h7 style="color:red;text-align:left">@ViewData["Loi6"]</h7>
 
                         <div class="input-group custom">
                             @Html.TextBox("TenDN", "", new { @class = "form-control", type = "text", placeholder = "Tên Đăng Nhập" })
-                            <div class="input-group-append custom">
-                                <span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
-                            </div>
+
                         </div>
                         <h7 style="color:red;text-align:left">@ViewData["Loi2"] </h7>
 
                         <div class="input-group custom">
                             @Html.Password("Matkhau", "", new { @class = "form-control", type = "password", placeholder = "Mật Khẩu" })
-                            <div class="input-group-append custom">
-                                <span class="input-group-text"><i class="dw dw-padlock1"></i></span>
-                            </div>
+
                         </div>
                         <h7 style="color:red;text-align:left">@ViewData["Loi3"]</h7>
 
                         <div class="input-group custom">
                             @Html.Password("ReMatkhau", "", new { @class = "form-control", type = "password", placeholder = "Nhập Lại Mật Khẩu" })
-                            <div class="input-group-append custom">
-                                <span class="input-group-text"><i class="dw dw-padlock1"></i></span>
-                            </div>
+
                         </div>
                         <h7 style="color:red;text-align:left">@ViewData["Loi4"]</h7>
 
                         <div class="input-group custom">
                             @Html.TextBox("Dienthoai", "", new { @class = "form-control", type = "tel", placeholder = "Điện Thoại" })
-                            <div class="input-group-append custom">
-                                <span class="input-group-text"></span>
-                            </div>
+
                         </div>
                         <h7 style="color:red;text-align:left">@ViewData["Loi5"]</h7>
 
                         <div class="input-group custom">
                             @Html.TextBox("CMND", "", new { @class = "form-control", type = "cmnd", placeholder = "CMND/CCCD" })
-                            <div class="input-group-append custom">
-                                <span class="input-group-text"></span>
-                            </div>
+
                         </div>
                         <h7 style="color:red;text-align:left">@ViewData["Loi6"]</h7>
 
@@ -87,10 +73,11 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="input-group mb-0">
-                                    <h7>Đã có tài khoản</h7> &nbsp; <h7 style="color:blue" ;> @Html.ActionLink("Đăng nhập", "Login")</h7>
+                                    <h7>Đã có tài khoản</h7> &nbsp; <h7>@Html.ActionLink("Đăng nhập", "Login", null, new { style = "color: blue;" })</h7>
                                 </div>
                             </div>
                         </div>
+
                     }
                 </div>
             </div>

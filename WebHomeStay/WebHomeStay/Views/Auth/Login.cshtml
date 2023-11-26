@@ -17,39 +17,38 @@
                     @using (Html.BeginForm())
                     {
                         @Html.ValidationSummary(true)
-                        {
-                            <div class="mb-3">
-                                <p style="color:red;">@ViewData["Loi1"]</p>
-                                <div class="input-group">
-                                    <span class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        <div class="mb-3">
+                            <p style="color:red;">@ViewData["Loi1"]</p>
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                </span>
+                                @Html.TextBox("TenDN", "", new { @class = "form-control", type = "text", placeholder = "Tên Đăng Nhập" })
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <p style="color:red;">@ViewData["Loi2"]</p>
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                                </span>
+                                @Html.Password("MatKhau", "", new { @class = "form-control", type = "password", placeholder = "Mật Khẩu", @id = "MatKhau" })
+                                <div class="input-group-append">
+                                    <span class="input-group-text" style="cursor: pointer;" onclick="togglePassword()">
+                                        <i class="fa fa-eye"></i>
                                     </span>
-                                    @Html.TextBox("TenDN", "", new { @class = "form-control", type = "text", placeholder = "Tên Đăng Nhập" })
                                 </div>
                             </div>
-                            <div class="mb-3">
-                                <p style="color:red;">@ViewData["Loi2"]</p>
-                                <div class="input-group">
-                                    <span class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                                    </span>
-                                    @Html.Password("MatKhau", "", new { @class = "form-control", type = "password", placeholder = "Mật Khẩu", @id = "MatKhau" })
-                                    <div class="input-group-append">
-                                        <span class="input-group-text" style="cursor: pointer;" onclick="togglePassword()">
-                                            <i class="fas fa-eye"></i>
-                                        </span>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6 mb-3">
+                                <input class="btn btn-primary btn-lg btn-block" type="submit" value="Đăng nhập">
                             </div>
-                            <div class="row">
-                                <div class="col-sm-6 mb-3">
-                                    <input class="btn btn-primary btn-lg btn-block" type="submit" value="Đăng nhập">
-                                </div>
-                                <div class="col-sm-6 mb-3">
-                                    @Html.ActionLink("Đăng ký tài khoản", "Register", "Auth", null, new { @class = "btn btn-outline-primary btn-lg btn-block" })
-                                </div>
+                            <div class="col-sm-6 mb-3">
+                                @Html.ActionLink("Đăng ký tài khoản", "Register", "Auth", null, new { @class = "btn btn-outline-primary btn-lg btn-block" })
                             </div>
-                        }
+                        </div>
+
                     }
                 </div>
             </div>
@@ -61,7 +60,16 @@
 <script>
     function togglePassword() {
         var passwordInput = document.getElementById('MatKhau');
-        var type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-        passwordInput.setAttribute('type', type);
+        var icon = document.querySelector('.input-group-append i');
+
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            passwordInput.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
     }
 </script>
