@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html>
+@using WebHomeStay.Models;
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,7 +37,73 @@
         body {
             scroll-behavior: smooth;
         }
+        /* CSS cho phần user-dropdown */
+        .user-dropdown {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        /* CSS cho phần user-profile */
+        .user-profile {
+            display: flex;
+            align-items: center;
+        }
+
+            .user-profile img {
+                margin-right: 8px; /* Khoảng cách giữa hình ảnh và thông tin người dùng */
+            }
+
+        .user-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .username {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .logout a {
+            color: #007bff; /* Màu chữ cho đường link đăng xuất */
+        }
+
+        /* CSS cho phần default-icon */
+        .default-icon a img {
+            border: 1px solid #007bff; /* Viền cho biểu tượng người dùng khi chưa đăng nhập */
+            border-radius: 50%;
+            padding: 3px; /* Kích thước đường viền */
+        }
+
+        /* CSS cho phần user-dropdown khi không đăng nhập */
+        .user-dropdown .user-details {
+            display: none;
+            position: absolute;
+            top: 100%; /* Đặt vị trí dropdown xuống phía dưới */
+            left: 95%;
+            transform: translateX(-50%); /* Căn giữa theo chiều ngang */
+            background-color: white; /* Màu nền trắng */
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1); /* Đổ bóng cho dropdown */
+            padding: 10px;
+            z-index: 1000;
+        }
+
+        /* CSS cho phần user-dropdown khi đã đăng nhập */
+        .user-dropdown .show-details {
+            display: flex;
+            flex-direction: column; /* Hiển thị theo chiều dọc */
+            align-items: center;
+        }
+
+        .user-dropdown .user-profile img {
+            cursor: pointer;
+        }
     </style>
+    @{
+        KHACHHANG kh = Session["KH"] as KHACHHANG;
+    }
 </head>
 <body>
 
@@ -100,14 +167,33 @@
                                 </div>
                                 <a href="@Url.Action("Contact", "Home")" class="nav-item nav-link">Contact</a>
                             </div>
-                            <a href="https://htmlcodex.com/hotel-html-template-pro" class="btn btn-primary rounded-0 py-4 px-md-5 d-none d-lg-block">Đăng nhập<i class="fa fa-arrow-right ms-3"></i></a>
+                            <ul>
+                                <li class="user-dropdown">
+                                    @if (kh != null)
+                                    {
+                                        <div class="user-profile" onclick="toggleUserDetails()">
+                                            <img src="~/Images/KhachHang/img/icon/user.svg" width="21" height="21" alt="User Avatar">
+                                            <div class="user-details" style="color: black; width: 200px;">
+                                                <span class="username">@kh.HOTEN</span>
+                                                <span class="logout"><a href="@Url.Action("DangXuat", "Home")">Đăng Xuất</a></span>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("Login","Auth")" class="btn btn-primary rounded-0 py-4 px-md-5 d-none d-lg-block">
+                                            Đăng nhập<i class="fa fa-arrow-right ms-3"></i>
+                                        </a>
+                                    }
+                                </li>
+                            </ul>
                         </div>
                     </nav>
                 </div>
             </div>
         </div>
         <!-- Header End -->
-       
+
         <div class="container body-content">
             @RenderBody()
             <hr />

@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "L3OPARD";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!-- Booking Start -->
@@ -45,3 +46,36 @@
     </div>
 </div>
 <!-- Booking End -->
+
+<style>
+    a {
+        color: #000000
+    }
+
+        a:hover {
+            color: #808080
+        }
+</style>
+
+
+<section class="product spad">
+    <div class="container">
+        <h2>Sản phẩm mới</h2>
+        <div class="row">
+            @foreach (var p in ViewBag.Tasks)
+            {
+                <div class="col-lg-3 ">
+                    <div class="product__item">
+                        <div class="">
+                            <a href="@Url.Action("Details", "Sanpham", new {@id = p.MAPHONG}, null)">
+                                
+                            </a>
+                        </div>
+                        
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

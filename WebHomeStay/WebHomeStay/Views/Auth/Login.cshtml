@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LoginRegisterLayout.cshtml";
+}
+
+<div class="login-wrap d-flex align-items-center flex-wrap justify-content-center">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6 col-lg-7">
+                <img src="~/img/img/background.svg" alt="" class="img-fluid">
+            </div>
+            <div class="col-md-6 col-lg-5">
+                <div class="login-box bg-white box-shadow border-radius-10">
+                    <div class="login-title">
+                        <h2 class="text-center text-primary">Đăng Nhập Tài Khoản</h2>
+                    </div>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.ValidationSummary(true)
+                        {
+                            <div class="mb-3">
+                                <p style="color:red;">@ViewData["Loi1"]</p>
+                                <div class="input-group">
+                                    <span class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    </span>
+                                    @Html.TextBox("TenDN", "", new { @class = "form-control", type = "text", placeholder = "Tên Đăng Nhập" })
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <p style="color:red;">@ViewData["Loi2"]</p>
+                                <div class="input-group">
+                                    <span class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                    </span>
+                                    @Html.Password("MatKhau", "", new { @class = "form-control", type = "password", placeholder = "Mật Khẩu", @id = "MatKhau" })
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" style="cursor: pointer;" onclick="togglePassword()">
+                                            <i class="fas fa-eye"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 mb-3">
+                                    <input class="btn btn-primary btn-lg btn-block" type="submit" value="Đăng nhập">
+                                </div>
+                                <div class="col-sm-6 mb-3">
+                                    @Html.ActionLink("Đăng ký tài khoản", "Register", "Auth", null, new { @class = "btn btn-outline-primary btn-lg btn-block" })
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<p style="color:red;text-align:center">@ViewBag.TB</p>
+
+<script>
+    function togglePassword() {
+        var passwordInput = document.getElementById('MatKhau');
+        var type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+    }
+</script>
