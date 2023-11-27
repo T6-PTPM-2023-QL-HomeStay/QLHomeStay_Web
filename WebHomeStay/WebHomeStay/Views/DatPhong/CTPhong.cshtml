@@ -1,4 +1,4 @@
-﻿
+﻿@model WebHomeStay.Models.PHONG
 @{
     ViewBag.Title = "Chi tiết phòng";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
@@ -16,7 +16,34 @@
             display: block; /* Loại bỏ khoảng trắng dưới hình ảnh */
             margin: 0 auto; /* Căn giữa hình ảnh trong thẻ card */
         }
-
 </style>
-<h2>CTPhong</h2>
+<div class="container mt-4">
+    <h3>Chi Tiết Phòng</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <p><strong>Mã Phòng:</strong> @Model.MAPHONG</p>
+            <p><strong>Tên Phòng:</strong> @Model.TENPHONG</p>
+            <p><strong>Loại Phòng:</strong> @(Model.LOAIPHONG != null ? Model.LOAIPHONG.TENLOAI : "Không có")</p>
+            <p><strong>Số Lượng Người Ở:</strong> @Model.SOLUONGNGUOIO Người</p>
+            <p><strong>Mô Tả:</strong> Phòng tiện nghi với thiết bị hiện đại, không gian thoải mái và trang thiết bị chất lượng.<br /> Trải nghiệm kỳ nghỉ đẳng cấp tại phòng chúng tôi!</p>
+            <p><strong>Dịch Vụ Đi Kèm:</strong></p>
+            <ul>
+                <li>Wifi miễn phí</li>
+                <li>TV màn hình phẳng</li>
+                <li>Dịch vụ phòng hàng ngày</li>
+                <li>Miễn phí nước suối và đồ uống trong minibar</li>
+                <li>Phòng tắm riêng với vòi sen và bồn tắm</li>
+                <li>Điều hòa nhiệt độ</li>
+                <li>Máy pha cà phê và ấm đun nước</li>
+                <li>Bàn làm việc thoải mái</li>
+                
+            </ul>
+           
+            <a href="@Url.Action("Index", "DatPhong")" class="btn btn-primary">Quay Lại Danh Sách Phòng</a>
+        </div>
+        <div class="col-md-6 text-center">
+            <img src="~/img/img/@(Model.MAPHONG).jpg" style="max-width:100%; margin-bottom:20px" />
+        </div>
+    </div>
+</div>
 

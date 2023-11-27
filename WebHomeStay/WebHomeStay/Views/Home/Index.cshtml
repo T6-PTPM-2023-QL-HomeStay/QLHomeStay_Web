@@ -2,7 +2,28 @@
     ViewBag.Title = "L3OPARD";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    a {
+        color: #000000
+    }
 
+        a:hover {
+            color: #808080
+        }
+
+    .card {
+        position: relative;
+        overflow: hidden;
+    }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            max-width: 100%; /* Đặt tối đa chiều rộng */
+            display: block; /* Loại bỏ khoảng trắng dưới hình ảnh */
+            margin: 0 auto; /* Căn giữa hình ảnh trong thẻ card */
+        }
+</style>
 <!-- Booking Start -->
 <div class="container-fluid booking pb-5 wow fadeIn" data-wow-delay="0.1s">
     <div class="container">
@@ -47,15 +68,7 @@
 </div>
 <!-- Booking End -->
 
-<style>
-    a {
-        color: #000000
-    }
 
-        a:hover {
-            color: #808080
-        }
-</style>
 
 
 <div class="container mt-4">
@@ -65,14 +78,17 @@
         {
             <div class="col">
                 <div class="card phong p-3">
-                    <img src="~/img/img/@(pv.MAPHONG).jpg" style="width:auto" />
+                    <a href="@Url.Action("CTPhong", "Datphong", new { ma = pv.MAPHONG })">
+                        <img src="~/img/img/@(pv.MAPHONG).jpg" />
+                    </a>
                     <span>Tên phòng: @pv.TENPHONG</span><br />
                     <label>Loại Phòng: @(pv.LOAIPHONG != null ? pv.LOAIPHONG.TENLOAI : "Không có")</label><br />
                     <span class="gia-thue">Số người ở: @pv.SOLUONGNGUOIO Người </span><br />
                     <span>Trạng thái: @pv.TRANGTHAI</span><br />
+                    <span>Giá: @String.Format("{0:0,0 VNĐ/người}", pv.LOAIPHONG.GIAPH)</span><br />
 
                     @if (pv.TRANGTHAI == "Đã thuê")
-                    {                  
+                    {
                         <button class="btn btn-dat-phong" disabled>ĐẶT PHÒNG</button>
                     }
                     else

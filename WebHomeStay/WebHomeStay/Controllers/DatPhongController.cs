@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebHomeStay.Models;
+using static WebHomeStay.Models.Datphong;
+
 namespace WebHomeStay.Controllers
 {
     public class DatPhongController : Controller
@@ -13,7 +15,7 @@ namespace WebHomeStay.Controllers
         public ActionResult Index()
         {
             List<PHONG> p = db.PHONGs.ToList();
-            
+
             return View(p);
         }
 
@@ -48,7 +50,6 @@ namespace WebHomeStay.Controllers
             {
                 return HttpNotFound();
             }
-
             return View(phong);
         }
 

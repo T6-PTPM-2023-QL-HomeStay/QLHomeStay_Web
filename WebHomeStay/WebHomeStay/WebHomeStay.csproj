@@ -145,6 +145,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Database.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Datphong.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
