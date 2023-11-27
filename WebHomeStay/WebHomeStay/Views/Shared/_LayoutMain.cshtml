@@ -162,13 +162,13 @@
                                 <li class="user-dropdown">
                                     @if (kh != null)
                                     {
-                                        <div class="user-profile" onclick="toggleUserDetails()">
-                                            <img src="~/Images/KhachHang/img/icon/user.svg" width="21" height="21" alt="User Avatar">
-                                            <div class="user-details" style="color: black; width: 200px;">
-                                                <span class="username">@kh.HOTEN</span>
-                                                <span class="logout"><a href="@Url.Action("DangXuat", "Home")">Đăng Xuất</a></span>
-                                            </div>
+                                    <div class="user-profile" onclick="toggleUserDetails()">
+                                        <img src="~/img/icon/user.svg" width="21" height="21" alt="User Avatar">
+                                        <div class="user-details" style="color: black; width: 200px;">
+                                            <span class="username">@kh.HOTEN</span>
+                                            <span class="logout"><a href="@Url.Action("DangXuat", "Home")">Đăng Xuất</a></span>
                                         </div>
+                                    </div>
                                     }
                                     else
                                     {

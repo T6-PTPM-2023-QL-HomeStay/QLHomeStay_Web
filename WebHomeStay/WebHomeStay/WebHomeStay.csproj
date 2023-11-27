@@ -217,6 +217,7 @@
     <Content Include="img\about-4.jpg" />
     <Content Include="img\carousel-1.jpg" />
     <Content Include="img\carousel-2.jpg" />
+    <Content Include="img\icon\user.svg" />
     <Content Include="img\img\background.svg" />
     <Content Include="img\img\P01.jpg" />
     <Content Include="img\img\P02.jpg" />
@@ -357,6 +358,7 @@
     <Content Include="Views\DatPhong\Index.cshtml" />
     <Content Include="Views\Home\LoaiPhong.cshtml" />
     <Content Include="Views\DatPhong\LoaiPhong.cshtml" />
+    <Content Include="Views\DatPhong\CTPhong.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

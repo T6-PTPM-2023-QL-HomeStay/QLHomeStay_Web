@@ -19,26 +19,40 @@ namespace WebHomeStay.Controllers
 
         public ActionResult LoaiPhong(string Maloai)
         {
-            var list = db.PHONGs.Where(s => s.MALOAIPHONG.Equals(Maloai)).ToList();
+            var listPhong = db.PHONGs.Where(s => s.MALOAIPHONG == Maloai).ToList();
 
-            if (list.Count == 0)
+            if (listPhong.Count == 0)
             {
-                ViewBag.TB = "Khong tim thay";
+                ViewBag.TB = "Không tìm thấy phòng nào thuộc mã loại " + Maloai;
+                ViewBag.LoaiAo = ""; // Không có phòng, đặt LoaiPhong là chuỗi trống
             }
             else
             {
-                // Lấy ra tên từ đối tượng LOAIPHONG
-                string ten = db.LOAIPHONGs
-                    .Where(lp => lp.MALOAI.Equals(Maloai))
-                    .Select(lp => lp.TENLOAI)
+                // Lấy tên loại phòng từ db.LOAIPHONGs
+                string tenLoai = db.LOAIPHONGs
+                    .Where(s => s.MALOAI == Maloai)
+                    .Select(s => s.TENLOAI)
                     .FirstOrDefault();
 
-                ViewBag.Loai = ten;
+                ViewBag.LoaiPhong = tenLoai;
             }
-            return View();
+
+            return View(listPhong);
         }
 
-    
+        public ActionResult CTPhong(string ma)
+        {
+            var phong = db.PHONGs.SingleOrDefault(t => t.MAPHONG.Equals(ma));
+
+            if (phong == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(phong);
+        }
+
+
 
     }
 }

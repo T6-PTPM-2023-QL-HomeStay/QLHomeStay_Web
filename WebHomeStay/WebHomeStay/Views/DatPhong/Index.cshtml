@@ -1,4 +1,4 @@
-﻿@using WebHomeStay.Models;
+﻿@model IEnumerable<WebHomeStay.Models.PHONG>
 
 
 @{
@@ -6,42 +6,83 @@
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
 
+<style>
+    .card {
+        position: relative;
+        overflow: hidden;
+    }
 
+        .card img {
+            width: 100%;
+            height: auto;
+            max-width: 100%; /* Đặt tối đa chiều rộng */
+            display: block; /* Loại bỏ khoảng trắng dưới hình ảnh */
+            margin: 0 auto; /* Căn giữa hình ảnh trong thẻ card */
+        }
+
+    .custom-action {
+        background-color: #f8f9fa; /* Màu nền div */
+        padding: 15px;
+        margin-top: 10px;
+        border-radius: 8px;
+    }
+
+        .custom-action ul {
+            list-style: none; /* Loại bỏ dấu chấm đầu dòng */
+            padding: 0; /* Loại bỏ padding mặc định của danh sách */
+        }
+
+        .custom-action li {
+            margin-bottom: 10px; /* Khoảng cách giữa các mục danh sách */
+            display: block; /* Hiển thị các mục danh sách dưới dạng block để không có dạng liên kết */
+        }
+</style>
 
 
 <div class="container mt-4">
     <h3><b>Danh Sách Phòng</b></h3>
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        @foreach (var pv in Model)
-        {
-            <div class="col-lg-3">
-                @if (pv != null)
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="custom-action">
+                <h2><i class="fa fa-home"></i>Chọn theo loại</h2>
+                @Html.Action("LoaiPhong", "Home")
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                @foreach (var pv in Model)
                 {
-                <div class="card phong p-3">
-                    <img src="~/img/img/@(pv.MAPHONG).jpg" style="width:auto" />
-                    <span>Tên phòng: @pv.TENPHONG</span><br />
-                    <label>Loại Phòng: @(pv.LOAIPHONG != null ? pv.LOAIPHONG.TENLOAI : "Không có")</label><br />
-                    <span class="gia-thue">Số người ở: @pv.SOLUONGNGUOIO Người </span><br />
-                    @if (pv.TRANGTHAI == "Đã thuê")
-                    {
-                        <button class="btn btn-dat-phong" disabled>ĐẶT PHÒNG</button>
-                    }
-                    else
-                    {
-                        <button class="btn btn-primary btn-dat-phong" onclick="location.href = '/DatPhong/DatPhong/@pv.MAPHONG'">ĐẶT PHÒNG</button>
-                    }
-                </div>
-                }
-                else
-                {
-                    <div class="phong">
-                        <span>Phòng không hợp lệ</span><br />
+                    <div class="col-lg-4">
+                        @if (pv != null)
+                        {
+                        <div class="card phong p-3">
+                            <a href="@Url.Action("CTPhong", "Datphong", new { ma = pv.MAPHONG })">
+                                <img src="~/img/img/@(pv.MAPHONG).jpg" />
+                            </a>
+                            <span>Tên phòng: @pv.TENPHONG</span><br />
+                            <label>Loại Phòng: @(pv.LOAIPHONG != null ? pv.LOAIPHONG.TENLOAI : "Không có")</label><br />
+                            <span class="gia-thue">Số người ở: @pv.SOLUONGNGUOIO Người </span><br />
+                            <span>Trạng thái: @pv.TRANGTHAI</span><br />
+                            @if (pv.TRANGTHAI == "Đã thuê")
+                            {
+                                <button class="btn btn-dat-phong" disabled>ĐẶT PHÒNG</button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-primary btn-dat-phong" onclick="location.href = '/DatPhong/DatPhong/@pv.MAPHONG'">ĐẶT PHÒNG</button>
+                            }
+                        </div>
+                        }
+                        else
+                        {
+                            <div class="phong">
+                                <span>Phòng không hợp lệ</span><br />
+                            </div>
+                        }
                     </div>
                 }
             </div>
-        }
+        </div>
     </div>
 </div>
-
-
 

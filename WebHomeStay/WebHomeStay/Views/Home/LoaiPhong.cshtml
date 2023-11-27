@@ -4,7 +4,7 @@
     @foreach (var item in Model)
     {
         <li>
-            @Html.ActionLink(item.TENLOAI, "LoaiPhong", "DatPhong", new { Maloai = item.MALOAI }, null)
+            @Html.ActionLink(item.TENLOAI, "LoaiPhong", "DatPhong", new { @Maloai = item.MALOAI }, null)
         </li>
     }
 </ul>

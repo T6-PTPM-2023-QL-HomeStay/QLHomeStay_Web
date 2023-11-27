@@ -1,33 +1,67 @@
-﻿@using WebHomeStay.Models;
+﻿@model IEnumerable<WebHomeStay.Models.PHONG>
 
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Loại phòng";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
 
-
-<h3>Danh Sách Phòng</h3>
-<div class="container">
-    @foreach (var pv in Model)
-    {
-        if (pv != null)
-        {
-            <div class="phong">
-                <span>Tên phòng: @pv.TENPHONG</span><br />
-                <label>Loại Phòng: @(pv.LOAIPHONG != null ? pv.LOAIPHONG.TENLOAI : "Không có")</label><br />
-                <span class="gia-thue">@pv.SOLUONGNGUOIO Người </span><br />
-                <input type="button" class="btn-dat-phong" onclick="location.href = '/DatPhong/DatPhong/@pv.MAPHONG'" value="ĐẶT PHÒNG" />
-            </div>
-        }
-        else
-        {
-            <div class="phong">
-                <span>Phòng không hợp lệ</span><br />
-            </div>
-        }
+<style>
+    .card {
+        position: relative;
+        overflow: hidden;
     }
 
-</div>
+        .card img {
+            width: 100%;
+            height: auto;
+            max-width: 100%; /* Đặt tối đa chiều rộng */
+            display: block; /* Loại bỏ khoảng trắng dưới hình ảnh */
+            margin: 0 auto; /* Căn giữa hình ảnh trong thẻ card */
+        }
 
+</style>
+<div class="container mt-4">
+    <h3><b>Danh Sách Phòng Theo Loại: @ViewBag.LoaiAo</b></h3>
+    @if (Model.Count() > 0)
+    {
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            @foreach (var pv in Model)
+            {
+                <div class="col-lg-3">
+                    @if (pv != null)
+                    {
+                    <div class="card phong p-3">
+                        <a href="@Url.Action("CTPhong", "Datphong", new { ma = pv.MAPHONG })">
+                            <img src="~/img/img/@(pv.MAPHONG).jpg" />
+                        </a>
+                        <span>Tên phòng: @pv.TENPHONG</span><br />
+                        <label>Loại Phòng: @(pv.LOAIPHONG != null ? pv.LOAIPHONG.TENLOAI : "Không có")</label><br />
+                        <span class="gia-thue">Số người ở: @pv.SOLUONGNGUOIO Người </span><br />
+                        <span>Trạng thái: @pv.TRANGTHAI</span><br />
+                        @if (pv.TRANGTHAI == "Đã thuê")
+                        {
+                            <button class="btn btn-dat-phong" disabled>ĐẶT PHÒNG</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-primary btn-dat-phong" onclick="location.href = '/DatPhong/DatPhong/@pv.MAPHONG'">ĐẶT PHÒNG</button>
+                        }
+                    </div>
+                    }
+                    else
+                    {
+                        <div class="phong">
+                            <span>Phòng không hợp lệ</span><br />
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p>Không có phòng nào thuộc loại này.</p>
+    }
+</div>
 
