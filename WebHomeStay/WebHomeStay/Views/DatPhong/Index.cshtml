@@ -2,32 +2,45 @@
 
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Danh sách phòng";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
 
 
-<h3>Danh Sách Phòng</h3>
-<div class="container">
-    @foreach (var pv in Model)
-    {
-        if (pv != null)
-        {
-            <div class="phong">
-                <span>Tên phòng: @pv.TENPHONG</span><br />
-                <label>Loại Phòng: @(pv.LOAIPHONG != null ? pv.LOAIPHONG.TENLOAI : "Không có")</label><br />
-                <span class="gia-thue">Số người ở: @pv.SOLUONGNGUOIO Người </span><br />
-                <input type="button" class="btn-dat-phong" onclick="location.href = '/DatPhong/DatPhong/@pv.MAPHONG'" value="ĐẶT PHÒNG" />
-            </div>
-        }
-        else
-        {
-            <div class="phong">
-                <span>Phòng không hợp lệ</span><br />
-            </div>
-        }
-    }
 
+
+<div class="container mt-4">
+    <h3><b>Danh Sách Phòng</b></h3>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        @foreach (var pv in Model)
+        {
+            <div class="col-lg-3">
+                @if (pv != null)
+                {
+                    <div class="card phong p-3">
+                        <span>Tên phòng: @pv.TENPHONG</span><br />
+                        <label>Loại Phòng: @(pv.LOAIPHONG != null ? pv.LOAIPHONG.TENLOAI : "Không có")</label><br />
+                        <span class="gia-thue">Số người ở: @pv.SOLUONGNGUOIO Người </span><br />
+                        @if (pv.TRANGTHAI == "Đã thuê")
+                        {
+                            <button class="btn btn-dat-phong" disabled>ĐẶT PHÒNG</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-primary btn-dat-phong" onclick="location.href = '/DatPhong/DatPhong/@pv.MAPHONG'">ĐẶT PHÒNG</button>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="phong">
+                        <span>Phòng không hợp lệ</span><br />
+                    </div>
+                }
+            </div>
+        }
+    </div>
 </div>
+
 
 

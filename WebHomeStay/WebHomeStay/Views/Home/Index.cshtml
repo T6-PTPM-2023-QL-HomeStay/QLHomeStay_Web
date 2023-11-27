@@ -58,29 +58,28 @@
 </style>
 
 
-<section class="product spad">
-    <div class="container">
-        <h2>Các Phòng</h2>
-        <div class="row">
-            @foreach (var pv in ViewBag.Tasks)
-            {
-                <div class="phong">
+<div class="container mt-4">
+    <h2>Các Phòng</h2>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        @foreach (var pv in ViewBag.Tasks)
+        {
+            <div class="col">
+                <div class="card phong p-3">
                     <span>Tên phòng: @pv.TENPHONG</span><br />
                     <label>Loại Phòng: @(pv.LOAIPHONG != null ? pv.LOAIPHONG.TENLOAI : "Không có")</label><br />
                     <span class="gia-thue">Số người ở: @pv.SOLUONGNGUOIO Người </span><br />
                     <span>Trạng thái: @pv.TRANGTHAI</span><br />
 
                     @if (pv.TRANGTHAI == "Đã thuê")
-                    {
-                        <span class="text-danger">Phòng đã được thuê</span><br />
-                        <input type="button" class="btn-dat-phong" value="ĐẶT PHÒNG" disabled />
+                    {                  
+                        <button class="btn btn-dat-phong" disabled>ĐẶT PHÒNG</button>
                     }
                     else
                     {
-                        <input type="button" class="btn-dat-phong" onclick="location.href = '/DatPhong/DatPhong/@pv.MAPHONG'" value="ĐẶT PHÒNG" />
+                        <button class="btn btn-primary btn-dat-phong" onclick="location.href = '/DatPhong/DatPhong/@pv.MAPHONG'">ĐẶT PHÒNG</button>
                     }
                 </div>
-            }
-        </div>
+            </div>
+        }
     </div>
-</section>
+</div>
