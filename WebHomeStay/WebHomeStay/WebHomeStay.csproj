@@ -218,6 +218,9 @@
     <Content Include="img\carousel-1.jpg" />
     <Content Include="img\carousel-2.jpg" />
     <Content Include="img\img\background.svg" />
+    <Content Include="img\img\P01.jpg" />
+    <Content Include="img\img\P02.jpg" />
+    <Content Include="img\img\P03.jpg" />
     <Content Include="img\room-1.jpg" />
     <Content Include="img\room-2.jpg" />
     <Content Include="img\room-3.jpg" />
