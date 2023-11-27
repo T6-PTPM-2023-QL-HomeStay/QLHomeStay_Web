@@ -23,6 +23,11 @@ namespace WebHomeStay.Controllers
             return View();
         }
 
+        public ActionResult LoaiPhong()
+        {
+            var model = db.LOAIPHONGs.OrderByDescending(p => p.TENLOAI);
+            return PartialView(model);
+        }
         public ActionResult Contact()
         {
            

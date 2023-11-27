@@ -60,20 +60,25 @@
 
 <section class="product spad">
     <div class="container">
-        <h2>Sản phẩm mới</h2>
+        <h2>Các Phòng</h2>
         <div class="row">
-            @foreach (var p in ViewBag.Tasks)
+            @foreach (var pv in ViewBag.Tasks)
             {
-                <div class="col-lg-3 ">
-                    <div class="product__item">
-                        <div class="">
-                            <a href="@Url.Action("Details", "Sanpham", new {@id = p.MAPHONG}, null)">
-                                
-                            </a>
-                        </div>
-                        
+                <div class="phong">
+                    <span>Tên phòng: @pv.TENPHONG</span><br />
+                    <label>Loại Phòng: @(pv.LOAIPHONG != null ? pv.LOAIPHONG.TENLOAI : "Không có")</label><br />
+                    <span class="gia-thue">Số người ở: @pv.SOLUONGNGUOIO Người </span><br />
+                    <span>Trạng thái: @pv.TRANGTHAI</span><br />
 
-                    </div>
+                    @if (pv.TRANGTHAI == "Đã thuê")
+                    {
+                        <span class="text-danger">Phòng đã được thuê</span><br />
+                        <input type="button" class="btn-dat-phong" value="ĐẶT PHÒNG" disabled />
+                    }
+                    else
+                    {
+                        <input type="button" class="btn-dat-phong" onclick="location.href = '/DatPhong/DatPhong/@pv.MAPHONG'" value="ĐẶT PHÒNG" />
+                    }
                 </div>
             }
         </div>

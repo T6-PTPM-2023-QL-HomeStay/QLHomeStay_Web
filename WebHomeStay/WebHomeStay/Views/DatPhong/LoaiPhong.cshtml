@@ -1,0 +1,33 @@
+﻿@using WebHomeStay.Models;
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+
+<h3>Danh Sách Phòng</h3>
+<div class="container">
+    @foreach (var pv in Model)
+    {
+        if (pv != null)
+        {
+            <div class="phong">
+                <span>Tên phòng: @pv.TENPHONG</span><br />
+                <label>Loại Phòng: @(pv.LOAIPHONG != null ? pv.LOAIPHONG.TENLOAI : "Không có")</label><br />
+                <span class="gia-thue">@pv.SOLUONGNGUOIO Người </span><br />
+                <input type="button" class="btn-dat-phong" onclick="location.href = '/DatPhong/DatPhong/@pv.MAPHONG'" value="ĐẶT PHÒNG" />
+            </div>
+        }
+        else
+        {
+            <div class="phong">
+                <span>Phòng không hợp lệ</span><br />
+            </div>
+        }
+    }
+
+</div>
+
+
