@@ -102,6 +102,7 @@
         .user-dropdown .user-profile img {
             cursor: pointer;
         }
+
     </style>
 
     @{ 
@@ -113,10 +114,10 @@
     <div class="container-xxl bg-white p-0">
         <!-- Spinner Start -->
         @*<div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-                <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
-            </div>*@
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>*@
         <!-- Spinner End -->
         <!-- Header Start -->
         <div class="container-fluid bg-dark px-0">
@@ -155,13 +156,14 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                            <div class="navbar-nav mr-auto py-0">
+                            <ul class="navbar-nav mr-auto py-0">
                                 <a href="@Url.Action("Index", "Home")" class="nav-item nav-link active">Trang chủ</a>
                                 <a href="@Url.Action("Index","DatPhong")" class="nav-item nav-link">Phòng</a>
                                 <a href="@Url.Action("About", "Home")" class="nav-item nav-link">Thông tin</a>
                                 <a href="@Url.Action("Contact", "Home")" class="nav-item nav-link">Liên hệ</a>
-                            </div>
-                            <ul>
+                            </ul>
+                            <ul class="navbar-nav mr-auto py-0 d-lg-none">
+                                <!-- Thêm class d-lg-none để chỉ hiển thị trên thiết bị nhỏ hơn LG -->
                                 <li class="user-dropdown">
                                     @if (kh != null)
                                     {
@@ -175,13 +177,12 @@
                                     }
                                     else
                                     {
-                                        <a href="@Url.Action("Login","Auth")" class="btn btn-primary rounded-0 py-4 px-md-5 d-none d-lg-block">
-                                            Đăng nhập<i class="fa fa-arrow-right ms-3"></i>
+                                        <a href="@Url.Action("Login","Auth")" class="nav-item nav-link btn btn-primary rounded-0 py-4 px-md-5">
+                                            Đăng nhập <i class="fa fa-arrow-right ms-3"></i>
                                         </a>
                                     }
                                 </li>
                             </ul>
-
                         </div>
                     </nav>
                 </div>
@@ -232,10 +233,35 @@
             @RenderBody()
             <hr />
         </div>
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-            <button id="scrollToTopBtn" class="btn btn-primary">&#9650;</button>
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>Thông Tin Liên Hệ</h5>
+                        <p>Địa chỉ:140 Lê Trọng Tấn, Quận Tân Phú, Tp. Hồ Chí Minh</p>
+                        <p>Điện thoại: +012 345 6789</p>
+                        <p>Email: l3opard@gmail.com</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Giờ Làm Việc</h5>
+                        <p>Thứ Hai - Thứ Sáu: 8:00 AM - 5:00 PM</p>
+                        <p>Thứ Bảy: 9:00 AM - 1:00 PM</p>
+                        <p>Chủ Nhật: Nghỉ</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Theo Dõi Chúng Tôi</h5>
+                        <p>Stay connected for updates:</p>
+                        <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center py-3">
+                <p>&copy; @DateTime.Now.Year - L3OPARD.</p>
+            </div>
         </footer>
+
 
     </div>
     <script src="~/Content/js/scrolltotop.js"></script>
