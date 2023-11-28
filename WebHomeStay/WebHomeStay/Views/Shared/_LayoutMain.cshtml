@@ -158,22 +158,23 @@
                                 <a href="@Url.Action("About", "Home")" class="nav-item nav-link">Thông tin</a>
                                 <a href="@Url.Action("Contact", "Home")" class="nav-item nav-link">Liên hệ</a>
                             </div>
-                            <ul>
+                            <ul class="navbar-nav mr-auto py-0 ">
+                                <!-- Thêm class d-lg-none để chỉ hiển thị trên thiết bị nhỏ hơn LG -->
                                 <li class="user-dropdown">
                                     @if (kh != null)
                                     {
-                                    <div class="user-profile" onclick="toggleUserDetails()">
-                                        <img src="~/img/icon/user.svg" width="21" height="21" alt="User Avatar">
-                                        <div class="user-details" style="color: black; width: 200px;">
-                                            <span class="username">@kh.HOTEN</span>
-                                            <span class="logout"><a href="@Url.Action("DangXuat", "Home")">Đăng Xuất</a></span>
+                                        <div class="user-profile" onclick="toggleUserDetails()">
+                                            <img src="~/img/icon/user.svg" width="21" height="21" alt="User Avatar">
+                                            <div class="user-details" style="color: black; width: 200px;">
+                                                <span class="username">@kh.HOTEN</span>
+                                                <span class="logout"><a href="@Url.Action("DangXuat", "Home")">Đăng Xuất</a></span>
+                                            </div>
                                         </div>
-                                    </div>
                                     }
                                     else
                                     {
-                                        <a href="@Url.Action("Login","Auth")" class="btn btn-primary rounded-0 py-4 px-md-5 d-none d-lg-block">
-                                            Đăng nhập<i class="fa fa-arrow-right ms-3"></i>
+                                        <a href="@Url.Action("Login","Auth")" class="nav-item nav-link btn btn-primary rounded-0 py-4 px-md-5">
+                                            Đăng nhập <i class="fa fa-arrow-right ms-3"></i>
                                         </a>
                                     }
                                 </li>
