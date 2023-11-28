@@ -2989,7 +2989,6 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
   position: relative;
   -ms-flex: 1 1 0%;
   -webkit-box-flex: 1;
-  flex: 1 1 0%;
   min-width: 0;
   margin-bottom: 0; }
 

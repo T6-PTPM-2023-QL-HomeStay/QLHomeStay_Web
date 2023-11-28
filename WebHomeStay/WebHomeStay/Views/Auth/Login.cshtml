@@ -21,7 +21,7 @@
                             <p style="color:red;">@ViewData["Loi1"]</p>
                             <div class="input-group">
                                 <span class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                    <span class="input-group-text"><i class="fa fa-user"> Tài khoản</i></span>
                                 </span>
                                 @Html.TextBox("TenDN", "", new { @class = "form-control", type = "text", placeholder = "Tên Đăng Nhập" })
                             </div>
@@ -30,12 +30,12 @@
                             <p style="color:red;">@ViewData["Loi2"]</p>
                             <div class="input-group">
                                 <span class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                                    <span class="input-group-text"><i class="fa fa-lock"> Mật khẩu</i></span>
                                 </span>
                                 @Html.Password("MatKhau", "", new { @class = "form-control", type = "password", placeholder = "Mật Khẩu", @id = "MatKhau" })
                                 <div class="input-group-append">
                                     <span class="input-group-text" style="cursor: pointer;" onclick="togglePassword()">
-                                        <i class="fa fa-eye"></i>
+                                        <i id="eyeIcon" class="fa fa-eye"></i> <span id="eyeText"style="margin-left: 5px;">Hiện mật khẩu</span>
                                     </span>
                                 </div>
                             </div>
@@ -60,16 +60,19 @@
 <script>
     function togglePassword() {
         var passwordInput = document.getElementById('MatKhau');
-        var icon = document.querySelector('.input-group-append i');
+        var icon = document.getElementById('eyeIcon');
+        var text = document.getElementById('eyeText');
 
         if (passwordInput.type === 'password') {
             passwordInput.type = 'text';
             icon.classList.remove('fa-eye');
             icon.classList.add('fa-eye-slash');
+            text.textContent = ' Ẩn mật khẩu';
         } else {
             passwordInput.type = 'password';
             icon.classList.remove('fa-eye-slash');
             icon.classList.add('fa-eye');
+            text.textContent = ' Hiện mật khẩu';
         }
     }
 </script>
