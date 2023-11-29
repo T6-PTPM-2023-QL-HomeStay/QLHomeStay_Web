@@ -28,41 +28,25 @@
 <div class="container-fluid booking pb-5 wow fadeIn" data-wow-delay="0.1s">
     <div class="container">
         <div class="bg-white shadow" style="padding: 35px;">
+            @using (Html.BeginForm("TimKiemPhong", "Home", FormMethod.Post, new { id = "searchForm" }))
+            {
             <div class="row g-2">
-                <div class="col-md-10">
-                    <div class="row g-2">
-                        <div class="col-md-3">
-                            <div class="date" id="date1" data-target-input="nearest">
-                                <input type="text" class="form-control datepicker" placeholder="Check in" data-target="#date1" data-toggle="datetimepicker" />
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="date" id="date2" data-target-input="nearest">
-                                <input type="text" class="form-control datepicker" placeholder="Check out" data-target="#date2" data-toggle="datetimepicker" />
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <select class="form-select">
-                                <option selected>Số người</option>
-                                <option value="1"> 1</option>
-                                <option value="2"> 2</option>
-                                <option value="3"> 3</option>
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                            <select class="form-select">
-                                <option selected>Trẻ em</option>
-                                <option value="1"> 1</option>
-                                <option value="2"> 2</option>
-                                <option value="3"> 3</option>
-                            </select>
-                        </div>
-                    </div>
+                <div class="col-md-3">
+                    @Html.DropDownList("loaiPhong", ViewBag.LoaiPhong as SelectList, "Chọn loại phòng", new { @class = "form-select" })
                 </div>
-                <div class="col-md-2">
-                    <button class="btn btn-primary w-100">Submit</button>
+                <div class="col-md-3">
+                    <input type="number" class="form-control" name="giaTien" placeholder="Giá tiền" />
+                </div>
+                <div class="col-md-3">
+                    <input type="number" class="form-control" name="soNguoi" placeholder="Số người ở" />
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" onclick="validateForm()" class="btn btn-primary w-100">Tìm kiếm</button>
                 </div>
             </div>
+            }
+           
+
         </div>
     </div>
 </div>
@@ -100,3 +84,16 @@
         }
     </div>
 </div>
+<script>
+    function validateForm() {
+        var loaiPhong = document.getElementById("loaiPhong").value;
+        var giaTien = document.getElementById("giaTien").value;
+        var soNguoi = document.getElementById("soNguoi").value;
+
+        if (loaiPhong !== "" || giaTien !== "" || soNguoi !== "") {
+            document.getElementById("searchForm").submit();
+        } else {
+            alert("Vui lòng nhập ít nhất một trường tìm kiếm!");
+        }
+    }
+</script>

@@ -59,7 +59,7 @@
                                 <a href="@Url.Action("CTPhong", "Datphong", new { ma = pv.MAPHONG })">
                                     <img src="~/img/img/@(pv.MAPHONG).jpg" />
                                 </a>
-                                <span>Tên phòng: @pv.TENPHONG</span><br />
+                                <span style="margin-top:10px;"><b>@pv.TENPHONG</b></span><br />
                                 <label>Loại Phòng: @(pv.LOAIPHONG != null ? pv.LOAIPHONG.TENLOAI : "Không có")</label><br />
                                 <span class="gia-thue">Số người ở: @pv.SOLUONGNGUOIO Người </span><br />
                                 <span>Trạng thái: @pv.TRANGTHAI</span><br />

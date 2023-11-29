@@ -1,8 +1,6 @@
-﻿@model IEnumerable<WebHomeStay.Models.PHONG>
-
-
+﻿@model List<WebHomeStay.Models.PHONG>
 @{
-    ViewBag.Title = "Loại phòng";
+    ViewBag.Title = "Kết quả tìm kiếm";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
 
@@ -19,18 +17,15 @@
             display: block; /* Loại bỏ khoảng trắng dưới hình ảnh */
             margin: 0 auto; /* Căn giữa hình ảnh trong thẻ card */
         }
-
 </style>
 <div class="container mt-4">
-    <h3><b>Danh Sách Phòng Theo Loại: @ViewBag.LoaiAo</b></h3>
-    @if (Model.Count() > 0)
+    <h2>Kết Quả Tìm Kiếm</h2>
+    @if (Model != null && Model.Any())
     {
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <div class="row">
             @foreach (var pv in Model)
             {
-                <div class="col-lg-3">
-                    @if (pv != null)
-                    {
+                <div class="col-md-4 mb-4">
                     <div class="card phong p-3">
                         <a href="@Url.Action("CTPhong", "Datphong", new { ma = pv.MAPHONG })">
                             <img src="~/img/img/@(pv.MAPHONG).jpg" />
@@ -40,6 +35,7 @@
                         <span class="gia-thue">Số người ở: @pv.SOLUONGNGUOIO Người </span><br />
                         <span>Trạng thái: @pv.TRANGTHAI</span><br />
                         <span>Giá: @String.Format("{0:0,0 VNĐ/người}", pv.LOAIPHONG.GIAPH)</span><br />
+
                         @if (pv.TRANGTHAI == "Đã thuê")
                         {
                             <button class="btn btn-dat-phong" disabled>ĐẶT PHÒNG</button>
@@ -49,20 +45,13 @@
                             <button class="btn btn-primary btn-dat-phong" onclick="location.href = '/DatPhong/DatPhong/@pv.MAPHONG'">ĐẶT PHÒNG</button>
                         }
                     </div>
-                    }
-                    else
-                    {
-                        <div class="phong">
-                            <span>Phòng không hợp lệ</span><br />
-                        </div>
-                    }
                 </div>
             }
         </div>
     }
     else
     {
-        <p>Không có phòng nào thuộc loại này.</p>
+        <p class="text-center mt-4">Không có phòng phù hợp với yêu cầu tìm kiếm.</p>
     }
 </div>
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebHomeStay.Models;
-using static WebHomeStay.Models.Datphong;
+
 
 namespace WebHomeStay.Controllers
 {
@@ -26,7 +26,7 @@ namespace WebHomeStay.Controllers
             if (listPhong.Count == 0)
             {
                 ViewBag.TB = "Không tìm thấy phòng nào thuộc mã loại " + Maloai;
-                ViewBag.LoaiAo = ""; // Không có phòng, đặt LoaiPhong là chuỗi trống
+                ViewBag.LoaiPhong = ""; // Không có phòng, đặt LoaiPhong là chuỗi trống
             }
             else
             {
@@ -53,7 +53,7 @@ namespace WebHomeStay.Controllers
             return View(phong);
         }
 
-
+       
 
     }
 }

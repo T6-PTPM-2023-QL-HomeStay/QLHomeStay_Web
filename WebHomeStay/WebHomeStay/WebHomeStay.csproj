@@ -145,7 +145,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Database.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Datphong.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +222,7 @@
     <Content Include="img\img\P01.jpg" />
     <Content Include="img\img\P02.jpg" />
     <Content Include="img\img\P03.jpg" />
+    <Content Include="img\img\P04.jpg" />
     <Content Include="img\room-1.jpg" />
     <Content Include="img\room-2.jpg" />
     <Content Include="img\room-3.jpg" />
@@ -360,6 +360,7 @@
     <Content Include="Views\Home\LoaiPhong.cshtml" />
     <Content Include="Views\DatPhong\LoaiPhong.cshtml" />
     <Content Include="Views\DatPhong\CTPhong.cshtml" />
+    <Content Include="Views\Home\TimKiemPhong.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

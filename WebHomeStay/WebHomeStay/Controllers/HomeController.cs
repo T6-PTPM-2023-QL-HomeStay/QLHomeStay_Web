@@ -12,14 +12,16 @@ namespace WebHomeStay.Controllers
         DatabaseDataContext db = new DatabaseDataContext();
         public ActionResult Index()
         {
-            var model = db.PHONGs.Take(4).OrderByDescending(p => p.MAPHONG);
+            var loaiPhongList = db.LOAIPHONGs.ToList();
+            ViewBag.LoaiPhong = new SelectList(loaiPhongList, "MALOAI", "TENLOAI");
+            var model = db.PHONGs.Take(3).OrderByDescending(p => p.MAPHONG);
             ViewBag.Tasks = model;
             return View();
         }
 
+       
         public ActionResult About()
-        {
-            
+        {           
             return View();
         }
 
@@ -30,8 +32,6 @@ namespace WebHomeStay.Controllers
         }
         public ActionResult Contact()
         {
-           
-
             return View();
         }
         public ActionResult DangXuat()
@@ -39,5 +39,23 @@ namespace WebHomeStay.Controllers
             Session.Clear();
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public ActionResult TimKiemPhong(string loaiPhong, decimal giaTien, int soNguoi)
+        {
+            // Lấy danh sách loại phòng và gán vào ViewBag
+            var loaiPhongList = db.LOAIPHONGs.ToList();
+            ViewBag.LoaiPhong = new SelectList(loaiPhongList, "MALOAI", "TENLOAI");
+
+            var danhSachPhong = db.PHONGs
+                .Where(p => p.TRANGTHAI == "Trống" &&
+                            (loaiPhong == null || p.MALOAIPHONG == loaiPhong) &&
+                            (giaTien == 0 || (decimal)p.LOAIPHONG.GIAPH <= giaTien) &&
+                            p.SOLUONGNGUOIO >= soNguoi)
+                .ToList();
+
+            return View("TimKiemPhong", danhSachPhong);
+        }
+
     }
 }

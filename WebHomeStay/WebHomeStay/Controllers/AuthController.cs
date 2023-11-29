@@ -48,7 +48,7 @@ namespace WebHomeStay.Controllers
             while (!isUnique)
             {
                 newID = prefix + GetNextIDFromDatabase();
-                // Kiểm tra xem mã tài khoản đã tồn tại trong bảng chưa
+                
                 isUnique = !db.TAIKHOANs.Any(tk => tk.MATK == newID || tk.MATK == newID);
             }
 
@@ -121,7 +121,7 @@ namespace WebHomeStay.Controllers
             kh.SDT = dienthoai;
             kh.NGAYSINH = DateTime.Parse(ngaysinh);
             kh.CCCD = soCMND;
-            kh.MAKH = newMAKH; // Gán giá trị của MAKH
+            kh.MAKH = newMAKH; 
 
             // Gán mã tài khoản vào bảng KHACHHANG
             kh.MATK = newMATK;
@@ -154,7 +154,7 @@ namespace WebHomeStay.Controllers
             }
             if (!string.IsNullOrEmpty(tendn) && !string.IsNullOrEmpty(matkhau))
             {
-                // Thay đổi dòng này để lấy tài khoản dựa trên tên đăng nhập, không cần kiểm tra mật khẩu ở đây
+                
                 TAIKHOAN ac = db.TAIKHOANs.SingleOrDefault(t => t.TENDANGNHAP == tendn);
 
                 // Kiểm tra nếu tài khoản tồn tại
