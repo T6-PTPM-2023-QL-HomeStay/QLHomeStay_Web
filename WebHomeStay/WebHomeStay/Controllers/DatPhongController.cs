@@ -53,7 +53,80 @@ namespace WebHomeStay.Controllers
             return View(phong);
         }
 
-       
+        [HttpGet]
+        public ActionResult DatPhongKH()
+        {
+            string maPhong = RouteData.Values["id"] as string;
+
+            if (string.IsNullOrEmpty(maPhong))
+            {
+                // Xử lý khi giá trị không tồn tại
+                return HttpNotFound();
+            }
+
+            var phong = db.PHONGs.FirstOrDefault(s => s.MAPHONG.Equals(maPhong));
+
+            if (phong == null)
+            {
+                // Xử lý khi không tìm thấy phòng
+                return HttpNotFound();
+            }
+            ViewBag.phong = phong;
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult DatPhongKH(HOPDONG hd, CTHD ct)
+        {
+            // Kiểm tra xem người dùng đã đăng nhập hay chưa
+            if (!User.Identity.IsAuthenticated)
+            {
+                // Xử lý khi người dùng chưa đăng nhập
+                return RedirectToAction("Login", "Auth");
+            }
+
+            string maPhong = RouteData.Values["id"] as string;
+
+            if (string.IsNullOrEmpty(maPhong))
+            {
+                // Xử lý khi giá trị không tồn tại
+                return HttpNotFound();
+            }
+
+            var phong = db.PHONGs.FirstOrDefault(s => s.MAPHONG.Equals(maPhong));
+
+            if (phong == null)
+            {
+                // Xử lý khi không tìm thấy phòng
+                return HttpNotFound();
+            }
+
+            // Lấy thông tin khách hàng từ cơ sở dữ liệu, ví dụ:
+            var khachHang = db.KHACHHANGs.FirstOrDefault();
+            // Trong trường hợp thực tế, bạn cần thiết kế cách lấy thông tin khách hàng dựa trên yêu cầu của bạn.
+
+            // Tính toán các giá trị còn thiếu
+            hd.MAPHONG = phong.MAPHONG;
+            hd.MAKHACH = khachHang.MAKH;
+            hd.THOIGIANTAO = DateTime.Now;
+            hd.TRANGTHAI = "Chưa thanh toán";
+
+            var tongtien = db.LOAIPHONGs.FirstOrDefault();
+
+            ct.MAHD = hd.MAHOPDONG;
+            // Thực hiện các bước để tính giá trị cho ct, ví dụ:
+            ct.TONGTIENTHANHTOAN = tongtien.GIAPH;
+
+            // Thêm HOPDONG và CTHD vào cơ sở dữ liệu
+            db.HOPDONGs.InsertOnSubmit(hd);
+            db.CTHDs.InsertOnSubmit(ct);
+
+            db.SubmitChanges();
+
+            return RedirectToAction("Index");
+        }
+
 
     }
 }

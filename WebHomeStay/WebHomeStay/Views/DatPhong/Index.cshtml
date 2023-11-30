@@ -3,7 +3,7 @@
 
 @{
     ViewBag.Title = "Danh sách phòng";
-    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <style>
@@ -55,25 +55,27 @@
                     <div class="col-lg-4">
                         @if (pv != null)
                         {
-                            <div class="card phong p-3">
-                                <a href="@Url.Action("CTPhong", "Datphong", new { ma = pv.MAPHONG })">
-                                    <img src="~/img/img/@(pv.MAPHONG).jpg" />
-                                </a>
-                                <span style="margin-top:10px;"><b>@pv.TENPHONG</b></span><br />
-                                <label>Loại Phòng: @(pv.LOAIPHONG != null ? pv.LOAIPHONG.TENLOAI : "Không có")</label><br />
-                                <span class="gia-thue">Số người ở: @pv.SOLUONGNGUOIO Người </span><br />
-                                <span>Trạng thái: @pv.TRANGTHAI</span><br />
-                                <span>Giá: @String.Format("{0:0,0 VNĐ/người}", pv.LOAIPHONG.GIAPH)</span><br />
+                        <div class="card phong p-3">
+                            <a href="@Url.Action("CTPhong", "Datphong", new { ma = pv.MAPHONG })">
+                                <img src="~/img/img/@(pv.MAPHONG).jpg" />
+                            </a>
+                            <span style="margin-top:10px;"><b>@pv.TENPHONG</b></span><br />
+                            <label>Loại Phòng: @(pv.LOAIPHONG != null ? pv.LOAIPHONG.TENLOAI : "Không có")</label><br />
+                            <span class="gia-thue">Số người ở: @pv.SOLUONGNGUOIO Người </span><br />
+                            <span>Trạng thái: @pv.TRANGTHAI</span><br />
+                            <span>Giá: @String.Format("{0:0,0 VNĐ/người}", pv.LOAIPHONG.GIAPH)</span><br />
 
-                                @if (pv.TRANGTHAI == "Đã thuê")
-                                {
-                                    <button class="btn btn-dat-phong" disabled>ĐẶT PHÒNG</button>
-                                }
-                                else
-                                {
-                                    <button class="btn btn-primary btn-dat-phong" onclick="location.href = '/DatPhong/DatPhong/@pv.MAPHONG'">ĐẶT PHÒNG</button>
-                                }
-                            </div>
+                            @if (pv.TRANGTHAI == "Đã thuê")
+                            {
+                                <button class="btn btn-dat-phong" disabled>ĐẶT PHÒNG</button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-primary btn-dat-phong" onclick="location.href = '/DatPhong/DatPhongKH/@pv.MAPHONG'">ĐẶT PHÒNG</button>
+                                
+
+                            }
+                        </div>
                         }
                         else
                         {

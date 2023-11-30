@@ -24,28 +24,68 @@
             margin: 0 auto; /* Căn giữa hình ảnh trong thẻ card */
         }
 </style>
+<!-- Carousel Start -->
+<div class="container-fluid p-0 mb-5">
+    <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="w-100" src="~/img/carousel-1.jpg" alt="Image">
+                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                    <div class="p-3" style="max-width: 700px;">
+                        <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">L3OPARD</h6>
+                        <h1 class="display-3 text-white mb-4 animated slideInDown">Chào mừng đến với Homestay của chúng tôi</h1>
+                        <a href="@Url.Action("Index","DatPhong")" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Xem Phòng</a>
+                        <a href="@Url.Action("Index","DatPhong")" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Đặt phòng</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img class="w-100" src="~/img/carousel-2.jpg" alt="Image">
+                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                    <div class="p-3" style="max-width: 700px;">
+                        <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">L3OPARD</h6>
+                        <h1 class="display-3 text-white mb-4 animated slideInDown">Chào mừng đến với Homestay của chúng tôi</h1>
+                        <a href="@Url.Action("Index","DatPhong")" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Xem Phòng</a>
+                        <a href="@Url.Action("Index","DatPhong")" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Đặt phòng</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
+                data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#header-carousel"
+                data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+<!-- Carousel End -->
 <!-- Booking Start -->
 <div class="container-fluid booking pb-5 wow fadeIn" data-wow-delay="0.1s">
     <div class="container">
         <div class="bg-white shadow" style="padding: 35px;">
             @using (Html.BeginForm("TimKiemPhong", "Home", FormMethod.Post, new { id = "searchForm" }))
             {
-            <div class="row g-2">
-                <div class="col-md-3">
-                    @Html.DropDownList("loaiPhong", ViewBag.LoaiPhong as SelectList, "Chọn loại phòng", new { @class = "form-select" })
+                <div class="row g-2">
+                    <div class="col-md-3">
+                        @Html.DropDownList("loaiPhong", ViewBag.LoaiPhong as SelectList, "Chọn loại phòng", new { @class = "form-select" })
+                    </div>
+                    <div class="col-md-3">
+                        <input type="number" class="form-control" name="giaTien" placeholder="Giá tiền" />
+                    </div>
+                    <div class="col-md-3">
+                        <input type="number" class="form-control" name="soNguoi" placeholder="Số người ở" />
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" onclick="validateForm()" class="btn btn-primary w-100">Tìm kiếm</button>
+                    </div>
                 </div>
-                <div class="col-md-3">
-                    <input type="number" class="form-control" name="giaTien" placeholder="Giá tiền" />
-                </div>
-                <div class="col-md-3">
-                    <input type="number" class="form-control" name="soNguoi" placeholder="Số người ở" />
-                </div>
-                <div class="col-md-3">
-                    <button type="submit" onclick="validateForm()" class="btn btn-primary w-100">Tìm kiếm</button>
-                </div>
-            </div>
             }
-           
+
 
         </div>
     </div>
@@ -77,7 +117,7 @@
                     }
                     else
                     {
-                        <button class="btn btn-primary btn-dat-phong" onclick="location.href = '/DatPhong/DatPhong/@pv.MAPHONG'">ĐẶT PHÒNG</button>
+                        <button class="btn btn-primary btn-dat-phong" onclick="location.href = '/DatPhong/DatPhongKH/@pv.MAPHONG'">ĐẶT PHÒNG</button>
                     }
                 </div>
             </div>
