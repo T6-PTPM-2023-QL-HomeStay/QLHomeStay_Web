@@ -1,0 +1,67 @@
+﻿@using WebHomeStay.Models;
+@model WebHomeStay.Models.DatPhong
+
+@{
+    ViewBag.Title = "DatPhongKH";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    KHACHHANG kh = Session["KH"] as KHACHHANG;
+    PHONG phong = ViewBag.phong;
+}
+
+<h2>Đặt Phòng</h2>
+
+@if (kh == null)
+{
+    <p class="text-danger">Bạn chưa đăng nhập, vui lòng đăng nhập để đặt phòng</p>
+}
+else
+{
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    Mã Khách Hàng
+                </dt>
+                <dd>
+                    @kh.MAKH
+                </dd>
+                <dt>
+                    Tên Khách Hàng
+                </dt>
+                <dd>
+                    @kh.HOTEN
+                </dd>
+                <dt>
+                    Mã Phòng
+                </dt>
+                <dd>
+                  @phong.MAPHONG
+                </dd>
+
+                <dt>
+                    Tổng Tiền Thanh Toán
+                </dt>
+                <dd>
+                    @String.Format("{0:0,0 VNĐ/người}", phong.LOAIPHONG.GIAPH)
+                </dd>
+
+                <!-- Thêm các trường khác tùy thuộc vào yêu cầu của bạn -->
+
+            </dl>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Đặt Phòng" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

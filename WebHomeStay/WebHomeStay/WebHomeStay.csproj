@@ -370,6 +370,7 @@
     <Content Include="Views\DatPhong\LoaiPhong.cshtml" />
     <Content Include="Views\DatPhong\CTPhong.cshtml" />
     <Content Include="Views\Home\TimKiemPhong.cshtml" />
+    <Content Include="Views\DatPhong\DatPhongKH.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

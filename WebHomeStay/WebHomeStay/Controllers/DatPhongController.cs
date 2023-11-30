@@ -102,9 +102,9 @@ namespace WebHomeStay.Controllers
                 return HttpNotFound();
             }
 
-            // Lấy thông tin khách hàng từ cơ sở dữ liệu, ví dụ:
+            
             var khachHang = db.KHACHHANGs.FirstOrDefault();
-            // Trong trường hợp thực tế, bạn cần thiết kế cách lấy thông tin khách hàng dựa trên yêu cầu của bạn.
+            
 
             // Tính toán các giá trị còn thiếu
             hd.MAPHONG = phong.MAPHONG;
