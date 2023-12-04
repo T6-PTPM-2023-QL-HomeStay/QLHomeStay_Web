@@ -53,6 +53,7 @@ namespace WebHomeStay.Controllers
             return View(phong);
         }
 
+
         [HttpGet]
         public ActionResult DatPhongKH()
         {
@@ -63,7 +64,7 @@ namespace WebHomeStay.Controllers
                 // Xử lý khi giá trị không tồn tại
                 return HttpNotFound();
             }
-
+            ViewBag.DichVuList = new SelectList(db.DVus, "MADV", "TenDV");
             var phong = db.PHONGs.FirstOrDefault(s => s.MAPHONG.Equals(maPhong));
 
             if (phong == null)
@@ -72,58 +73,59 @@ namespace WebHomeStay.Controllers
                 return HttpNotFound();
             }
             ViewBag.phong = phong;
+            ViewBag.dsnguoidung = db.KHACHHANGs.ToList();
+           
             return View();
         }
 
         [HttpPost]
-        [Authorize]
-        public ActionResult DatPhongKH(HOPDONG hd, CTHD ct)
+        public ActionResult DatPhongKH(HOADON hd, CTHD ct, FormCollection f)
         {
-            // Kiểm tra xem người dùng đã đăng nhập hay chưa
-            if (!User.Identity.IsAuthenticated)
-            {
-                // Xử lý khi người dùng chưa đăng nhập
-                return RedirectToAction("Login", "Auth");
-            }
+           
+            var makh = f["makh"];
+            var mahd = f["mahd"];
+            var ngaytao = f["ngaytao"];
+            var madv = f["madv"];
+            var maphong = f["maph"];
+            var tongtien = f["tongtien"];
+            var giamgia = f["giamgia"];
+            var sldichvu = f["sldichvu"];
 
-            string maPhong = RouteData.Values["id"] as string;
 
-            if (string.IsNullOrEmpty(maPhong))
-            {
-                // Xử lý khi giá trị không tồn tại
-                return HttpNotFound();
-            }
+            hd.MAKH = makh;
+            hd.NGAYTAO = DateTime.Now;
 
-            var phong = db.PHONGs.FirstOrDefault(s => s.MAPHONG.Equals(maPhong));
-
-            if (phong == null)
-            {
-                // Xử lý khi không tìm thấy phòng
-                return HttpNotFound();
-            }
-
-            
-            var khachHang = db.KHACHHANGs.FirstOrDefault();
-            
-
-            // Tính toán các giá trị còn thiếu
-            hd.MAPHONG = phong.MAPHONG;
-            hd.MAKHACH = khachHang.MAKH;
-            hd.THOIGIANTAO = DateTime.Now;
-            hd.TRANGTHAI = "Chưa thanh toán";
-
-            var tongtien = db.LOAIPHONGs.FirstOrDefault();
-
-            ct.MAHD = hd.MAHOPDONG;
-            // Thực hiện các bước để tính giá trị cho ct, ví dụ:
-            ct.TONGTIENTHANHTOAN = tongtien.GIAPH;
-
-            // Thêm HOPDONG và CTHD vào cơ sở dữ liệu
-            db.HOPDONGs.InsertOnSubmit(hd);
-            db.CTHDs.InsertOnSubmit(ct);
-
+            db.HOADONs.InsertOnSubmit(hd);
             db.SubmitChanges();
 
+            
+            IList<CTHD> cthds = new List<CTHD>();
+            //Khúc này sẽ add từng CTHD vào 
+            ct.MADV = 1;
+            ct.MAHD = hd.MAHD;
+            ct.MAPHONG = maphong;
+
+            db.CTHDs.InsertOnSubmit(ct);
+            db.SubmitChanges();
+            ct.SLDICHVU = 1;
+            ct.TONGTIENTHANHTOAN = ct.DVu.DONGIA * ct.SLDICHVU + ct.PHONG.LOAIPHONG.GIAPH;
+
+            db.SubmitChanges();
+            var phong = db.PHONGs.SingleOrDefault(p => p.MAPHONG == maphong);
+            if (phong != null)
+            {
+                // In ra giá trị trạng thái phòng để kiểm tra
+                Console.WriteLine("Trạng thái phòng trước khi cập nhật: " + phong.TRANGTHAI);
+
+                // Kiểm tra và cập nhật trạng thái phòng chỉ khi phòng đang ở trạng thái trống
+                if (phong.TRANGTHAI == "Trống")
+                {
+                    phong.TRANGTHAI = "Đã thuê";
+                    db.SubmitChanges();
+                }
+            }
+
+           
             return RedirectToAction("Index");
         }
 

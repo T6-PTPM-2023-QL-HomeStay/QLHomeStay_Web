@@ -63,7 +63,7 @@
                             <label>Loại Phòng: @(pv.LOAIPHONG != null ? pv.LOAIPHONG.TENLOAI : "Không có")</label><br />
                             <span class="gia-thue">Số người ở: @pv.SOLUONGNGUOIO Người </span><br />
                             <span>Trạng thái: @pv.TRANGTHAI</span><br />
-                            <span>Giá: @String.Format("{0:0,0 VNĐ/người}", pv.LOAIPHONG.GIAPH)</span><br />
+                            <span>Giá: @String.Format("{0:0,0 VNĐ}", pv.LOAIPHONG.GIAPH)</span><br />
 
                             @if (pv.TRANGTHAI == "Đã thuê")
                             {
