@@ -14,7 +14,7 @@
 
         .card img {
             width: 100%;
-            height: auto;
+            height: 145px;
             max-width: 100%; /* Đặt tối đa chiều rộng */
             display: block; /* Loại bỏ khoảng trắng dưới hình ảnh */
             margin: 0 auto; /* Căn giữa hình ảnh trong thẻ card */
@@ -57,7 +57,7 @@
                         {
                         <div class="card phong p-3">
                             <a href="@Url.Action("CTPhong", "Datphong", new { ma = pv.MAPHONG })">
-                                <img src="~/img/img/@(pv.MAPHONG).jpg" />
+                                <img src="~/img/img/@(pv.MAPHONG).jpg"/>
                             </a>
                             <span style="margin-top:10px;"><b>@pv.TENPHONG</b></span><br />
                             <label>Loại Phòng: @(pv.LOAIPHONG != null ? pv.LOAIPHONG.TENLOAI : "Không có")</label><br />
